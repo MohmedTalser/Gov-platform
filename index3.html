@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+  <title>منصة الخدمات - الرئيسية</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* ========== جميع الأنماط ========== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: #f0f4f8;
+      color: #1e293b;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .container { max-width: 1300px; margin: 0 auto; padding: 0 20px; width: 100%; }
+    header {
+      background: #ffffff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      padding: 16px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(4px);
+      background: rgba(255,255,255,0.85);
+      border-bottom: 1px solid #e9edf2;
+    }
+    .header-content {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #0f3b5e;
+      letter-spacing: -0.5px;
+    }
+    .logo img {
+      max-width: 60px;
+      height: auto;
+      object-fit: contain;
+      border-radius: 10px;
+      transition: transform 0.2s ease;
+      background: rgba(255,255,255,0.05);
+      padding: 2px;
+    }
+    .logo img:hover {
+      transform: scale(1.04);
+    }
+    .logo i { color: #2a7de1; margin-left: 6px; }
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      background: none;
+      border: none;
+      color: #0f3b5e;
+      cursor: pointer;
+      padding: 4px 12px;
+    }
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #1e293b;
+      font-weight: 500;
+      padding: 8px 4px;
+      border-bottom: 2px solid transparent;
+      transition: 0.2s;
+      font-size: 1rem;
+      white-space: nowrap;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      border-bottom-color: #2a7de1;
+      color: #0f3b5e;
+    }
+    .nav-links a i { margin-left: 6px; }
+    .btn-primary {
+      background: #2a7de1;
+      border: none;
+      color: white;
+      padding: 6px 20px;
+      border-radius: 40px;
+      transition: 0.2s;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .btn-primary:hover { background: #1a5fb0; transform: scale(0.97); }
+    .btn-secondary {
+      background: #e2e8f0;
+      border: none;
+      color: #1e293b;
+      padding: 6px 20px;
+      border-radius: 40px;
+      transition: 0.2s;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .btn-secondary:hover { background: #cbd5e1; }
+    main { flex: 1; padding: 30px 0 40px; }
+    .page { display: none; animation: fadeIn 0.3s ease; }
+    .page.active { display: block; }
+    @keyframes fadeIn { 0% { opacity: 0.4; transform: translateY(6px); } 100% { opacity: 1; transform: translateY(0); } }
+    .hero {
+      background: linear-gradient(145deg, #ffffff, #f9fcff);
+      padding: 30px 28px;
+      border-radius: 40px;
+      box-shadow: 0 8px 24px rgba(0, 30, 60, 0.06);
+      margin-bottom: 30px;
+      border: 1px solid #eef2f6;
+    }
+    .hero h1 { font-size: 2.4rem; font-weight: 700; color: #0b2a44; }
+    .hero h1 i { color: #2a7de1; margin-left: 10px; }
+    .hero p { font-size: 1.2rem; color: #334e68; max-width: 700px; margin-top: 8px; }
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px;
+      margin: 30px 0 20px;
+    }
+    .quick-card {
+      background: white;
+      padding: 20px 12px;
+      border-radius: 30px;
+      text-align: center;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.02);
+      border: 1px solid #e2e9f2;
+      transition: all 0.2s;
+      cursor: pointer;
+      text-decoration: none;
+      color: #1e293b;
+      font-weight: 500;
+    }
+    .quick-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 28px rgba(42, 125, 225, 0.10);
+      border-color: #b6d0f0;
+    }
+    .quick-card i { font-size: 2rem; color: #2a7de1; margin-bottom: 8px; display: block; }
+    .info-card {
+      background: white;
+      padding: 24px 28px;
+      border-radius: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+      border: 1px solid #e6edf5;
+      margin-bottom: 24px;
+    }
+    .info-card h2 { font-size: 1.8rem; margin-bottom: 12px; color: #0b2a44; }
+    .info-card p { line-height: 1.8; color: #2c3e50; }
+    .contact-item { display: flex; align-items: center; gap: 12px; margin: 14px 0; font-size: 1.1rem; }
+    .contact-item i { width: 32px; color: #2a7de1; font-size: 1.4rem; }
+    .dashboard-card {
+      background: white;
+      border-radius: 30px;
+      padding: 24px;
+      border: 1px solid #e2e9f2;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+      transition: 0.15s;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .dashboard-card h3 { display: flex; align-items: center; gap: 10px; font-size: 1.5rem; margin-bottom: 16px; color: #0b2a44; }
+    .dashboard-card ul { list-style: none; }
+    .dashboard-card li { padding: 12px 0; border-bottom: 1px solid #edf2f9; display: flex; justify-content: space-between; }
+    .badge { background: #eef4ff; padding: 2px 16px; border-radius: 40px; font-size: 0.8rem; color: #2a7de1; }
+    .login-box, .signup-box {
+      background: white;
+      border-radius: 36px;
+      padding: 28px 30px;
+      max-width: 520px;
+      margin: 20px auto;
+      border: 1px solid #dfe8f2;
+    }
+    .login-box .form-group, .signup-box .form-group { margin-bottom: 16px; }
+    .login-box label, .signup-box label { display: block; font-weight: 500; margin-bottom: 4px; color: #1e293b; font-size: 0.95rem; }
+    .login-box input, .signup-box input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #d6e0ec;
+      border-radius: 12px;
+      font-size: 1rem;
+      background: #fafcff;
+      transition: 0.15s;
+    }
+    .login-box input:focus, .signup-box input:focus {
+      outline: none;
+      border-color: #2a7de1;
+      box-shadow: 0 0 0 3px rgba(42,125,225,0.15);
+    }
+    .login-box .btn-primary, .signup-box .btn-primary { width: 100%; padding: 14px; font-size: 1.1rem; margin-top: 8px; }
+    .file-name { display: block; font-size: 0.85rem; color: #2a7de1; margin-top: 4px; }
+    .choice-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      max-width: 600px;
+      margin: 30px auto;
+    }
+    .choice-card {
+      background: white;
+      padding: 30px 20px;
+      border-radius: 40px;
+      text-align: center;
+      border: 2px solid #e2e9f2;
+      transition: 0.2s;
+      cursor: pointer;
+      text-decoration: none;
+      color: #1e293b;
+    }
+    .choice-card:hover {
+      transform: translateY(-8px);
+      border-color: #2a7de1;
+      box-shadow: 0 12px 30px rgba(42,125,225,0.15);
+    }
+    .choice-card i { font-size: 3rem; color: #2a7de1; margin-bottom: 16px; display: block; }
+    .choice-card h3 { font-size: 1.5rem; margin-bottom: 8px; }
+    .choice-card p { color: #64748b; font-size: 0.95rem; }
+    .back-row {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 20px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .footer { margin-top: 30px; text-align: center; color: #6a7e99; border-top: 1px solid #dce5ef; padding-top: 28px; font-size: 0.95rem; }
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #0b2a44;
+      color: white;
+      padding: 14px 36px;
+      border-radius: 60px;
+      font-weight: 500;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+      z-index: 999;
+    }
+    .toast.show { opacity: 1; pointer-events: auto; }
+    .hidden-dashboard-link { display: none !important; }
+
+    @media (max-width: 768px) {
+      .menu-toggle { display: block; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        gap: 8px;
+        padding: 16px 0 8px;
+        border-top: 1px solid #e9edf2;
+        margin-top: 12px;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { width: 100%; padding: 10px 12px; border-bottom: none; border-radius: 12px; transition: 0.15s; }
+      .nav-links a:hover { background: #f0f7ff; border-bottom: none; }
+      .choice-grid { grid-template-columns: 1fr; max-width: 350px; }
+      .hero h1 { font-size: 1.8rem; }
+      .quick-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+      .logo img { max-width: 44px; }
+      .logo { font-size: 1.3rem; }
+    }
+    @media (max-width: 450px) {
+      .quick-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .logo img { max-width: 36px; }
+      .logo { font-size: 1.1rem; gap: 6px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-content">
+      <div class="logo">
+        <img 
+          src="الهاتف/المنصه الحكوميه/logo.png" 
+          alt="شعار المنصة الحكومية"
+          onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='inline-block';"
+        >
+        <i class="fas fa-cubes" style="display:none; font-size:1.8rem; color:#2a7de1;"></i>
+        <span>منصة</span>
+      </div>
+      <button class="menu-toggle" id="menuToggle" aria-label="القائمة"><i class="fas fa-bars"></i></button>
+      <div class="nav-links" id="navLinks">
+        <a href="#" class="active" data-page="home"><i class="fas fa-home"></i> الرئيسية</a>
+        <a href="#" data-page="about"><i class="fas fa-info-circle"></i> نبذة عنا</a>
+        <a href="#" data-page="contact"><i class="fas fa-envelope"></i> تواصل معنا</a>
+        <a href="#" data-page="services"><i class="fas fa-concierge-bell"></i> الخدمات</a>
+        <a href="#" data-page="login"><i class="fas fa-sign-in-alt"></i> تسجيل دخول</a>
+        <a href="#" data-page="signup"><i class="fas fa-user-plus"></i> إنشاء حساب</a>
+        <a href="#" data-page="citizen-dashboard" id="citizenDashLink" class="hidden-dashboard-link"><i class="fas fa-user"></i> لوحة مواطن</a>
+        <a href="#" data-page="admin-dashboard" id="adminDashLink" class="hidden-dashboard-link"><i class="fas fa-user-shield"></i> لوحة أدمن</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="page active" id="page-home">
+      <div class="hero">
+        <h1><i class="fas fa-hand-peace"></i> أهلاً بك في منصة الخدمات</h1>
+        <p>نوفر لك تجربة رقمية متكاملة. اختر ما تريد من الروابط السريعة أدناه.</p>
+      </div>
+      <div class="quick-grid">
+        <a href="#" class="quick-card" data-page="about"><i class="fas fa-address-card"></i> نبذة عنا</a>
+        <a href="#" class="quick-card" data-page="contact"><i class="fas fa-phone-alt"></i> تواصل</a>
+        <a href="#" class="quick-card" data-page="services"><i class="fas fa-server"></i> الخدمات</a>
+        <a href="#" class="quick-card" data-page="login"><i class="fas fa-sign-in-alt"></i> تسجيل دخول</a>
+        <a href="#" class="quick-card" data-page="signup"><i class="fas fa-user-plus"></i> إنشاء حساب</a>
+      </div>
+      <div class="info-card" style="background: #e2ecfa;">
+        <p><i class="fas fa-star" style="color:#fbbf24;"></i> يمكنك التنقل بسهولة عبر البطاقات السريعة. بعد تسجيل الدخول ستظهر لك لوحة التحكم الخاصة بك.</p>
+      </div>
+    </section>
+
+    <section class="page" id="page-about">
+      <div class="back-row">
+        <button class="btn-secondary" onclick="navigateTo('home')"><i class="fas fa-arrow-right"></i> رجوع للرئيسية</button>
+      </div>
+      <div class="info-card">
+        <h2><i class="fas fa-info-circle"></i> نبذة عن المنصة</h2>
+        <p>منصة الخدمات هي بوابة رقمية تهدف إلى تسهيل الوصول إلى الخدمات العامة والخاصة. تم تصميمها لتكون جسراً بين المواطنين والإدارة، مع توفير تجربة سلسة وآمنة. نعمل على تطوير الحلول الذكية لخدمتك بشكل أفضل.</p>
+      </div>
+    </section>
+
+    <section class="page" id="page-contact">
+      <div class="back-row">
+        <button class="btn-secondary" onclick="navigateTo('home')"><i class="fas fa-arrow-right"></i> رجوع للرئيسية</button>
+      </div>
+      <div class="info-card">
+        <h2><i class="fas fa-address-book"></i> تواصل مع المطورين</h2>
+        <div class="contact-item"><i class="fas fa-envelope"></i> support@gmail.com</div>
+        <div class="contact-item"><i class="fas fa-phone"></i> +249 000000000</div>
+      </div>
+    </section>
+
+    <section class="page" id="page-services">
+      <div class="back-row">
+        <button class="btn-secondary" onclick="navigateTo('home')"><i class="fas fa-arrow-right"></i> رجوع للرئيسية</button>
+      </div>
+      <div class="info-card">
+        <h2><i class="fas fa-concierge-bell"></i> خدماتنا</h2>
+        <ul style="list-style: none; margin-top:8px;">
+          <li style="padding:10px 0; border-bottom:1px solid #ecf2f9;"><i class="fas fa-check-circle" style="color:#2a7de1;"></i> خدمات حكومية إلكترونية</li>
+          <li style="padding:10px 0;"><i class="fas fa-check-circle" style="color:#2a7de1;"></i> دعم فني على مدار الساعة</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="page" id="page-login">
+      <div class="back-row">
+        <button class="btn-secondary" onclick="navigateTo('home')"><i class="fas fa-arrow-right"></i> رجوع للرئيسية</button>
+      </div>
+      <div class="info-card" style="text-align:center;">
+        <h2><i class="fas fa-sign-in-alt"></i> اختر نوع تسجيل الدخول</h2>
+        <div class="choice-grid">
+          <a href="#" class="choice-card" data-page="login-citizen">
+            <i class="fas fa-user"></i>
+            <h3>مواطن</h3>
+            <p>تسجيل الدخول كمواطن</p>
+          </a>
+          <a href="#" class="choice-card" data-page="login-admin">
+            <i class="fas fa-user-shield"></i>
+            <h3>أدمن</h3>
+            <p>تسجيل الدخول كأدمن</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="page-signup">
+      <div class="back-row">
+        <button class="btn-secondary" onclick="navigateTo('home')"><i class="fas fa-arrow-right"></i> رجوع للرئيسية</button>
+      </div>
+      <div class="info-card" style="text-align:center;">
+        <h2><i class="fas fa-user-plus"></i> اختر نوع الحساب</h2>
+        <div class="choice-grid">
+          <a href="#" class="choice-card" data-page="signup-citizen">
+            <i class="fas fa-user"></i>
+            <h3>مواطن</h3>
+            <p>إنشاء حساب مواطن</p>
+          </a>
+          <a href="#" class="choice-card" data-page="signup-admin">
+            <i class="fas fa-user-shield"></i>
+            <h3>أدمن</h3>
+            <p>إنشاء حساب أدمن</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="page-login-citizen">
+      <div class="back-row">
+        <button class="btn-secondary" onclick="navigateTo('login')"><i class="fas fa-arrow-right"></i> رجوع لاختيار النوع</button>
+        <button class="btn-secondary" onclick="navigateTo('home')"><i class="fas fa-home"></i> الرئيسية</button>
+      </div>
+      <div class="login-box">
+        <h3><i class="fas fa-user"></i> دخول المواطن</h3>
+        <form id="citizenLoginForm">
+          <div class="form-group">
+            <label><i class="fas fa-user"></i> اسم المستخدم</label>
+            <input type="text" placeholder="اسم المستخدم" id="citizenUser" required>
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-lock"></i> كلمة المرور</label>
+            <input type="password" placeholder="كلمة المرور" id="citizenPassword" required>
+          </div>
+          <button type="submit" class="btn-primary"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="page" id="page-login-admin">
+      <div class="back-row">
+        <button class="btn-secondary" onclick="navigateTo('login')"><i class="fas fa-arrow-right"></i> رجوع لاختيار النوع</button>
+        <button class="btn-secondary" onclick="navigateTo('home')"><i class="fas fa-home"></i> الرئيسية</button>
+      </div>
+      <div class="login-box">
+        <h3><i class="fas fa-user-shield"></i> دخول الأدمن</h3>
+        <form id="adminLoginForm">
+          <div class="form-group">
+            <label><i class="fas fa-user"></i> اسم المستخدم</label>
+            <input type="text" placeholder="اسم المستخدم الخاص بالأدمن" id="adminUser" required>
+          </div>
+          <div class="form-group">
+            <label><i class="fas fa-lock"></i> كلمة المرور</label>
+            <input type="password" placeholder="كلمة المرور" id="adminPassword" required>
+          </div>
+          <button type="submit" class="btn-primary"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="page" id="page-signup-citizen">
+      <div class="back-row">
+        <button class="btn-secondary" onclick="navigateTo('signup')"><i class="fas fa-arrow-right"></i> رجوع لاختيار النوع</button>
+        <button class="btn-secondary" onclick="navigateTo('home')"><i class="fas fa-home"></i> الرئيسية</button>
+      </div>
+      <div class="signup-box">
+        <h3><i class="fas fa-user-plus"></i> إنشاء حساب مواطن</h3>
+        <div class="form-group">
+          <label><i class="fas fa-user"></i> الاسم الكامل</label>
+          <input type="text" placeholder="الاسم الكامل" id="signCitizenName">
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-envelope"></i> البريد الإلكتروني</label>
+          <input type="email" placeholder="example@domain.com" id="signCitizenEmail">
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-phone"></i> رقم الهاتف</label>
+          <input type="tel" placeholder="05xxxxxxxx" id="signCitizenPhone">
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-id-card"></i> الرقم الوطني (11 رقم)</label>
+          <input type="text" placeholder="الرقم الوطني" id="signCitizenNationalId" maxlength="14">
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-user"></i> اسم المستخدم</label>
+          <input type="text" placeholder="اختر اسم مستخدم" id="signCitizenUser">
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-lock"></i> كلمة المرور</label>
+          <input type="password" placeholder="كلمة المرور (4 أحرف على الأقل)" id="signCitizenPass">
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-file-upload"></i> إرفاق مستند (الرقم الوطني / الجواز / البطاقة القومية)</label>
+          <input type="file" id="signCitizenDocument" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+          <span class="file-name" id="signCitizenFileName">لم يتم اختيار ملف</span>
+        </div>
+        <button class="btn-primary" id="signCitizenBtn"><i class="fas fa-user-check"></i> إنشاء حساب مواطن</button>
+      </div>
+    </section>
+
+    <section class="page" id="page-signup-admin">
+      <div class="back-row">
+        <button class="btn-secondary" onclick="navigateTo('signup')"><i class="fas fa-arrow-right"></i> رجوع لاختيار النوع</button>
+        <button class="btn-secondary" onclick="navigateTo('home')"><i class="fas fa-home"></i> الرئيسية</button>
+      </div>
+      <div class="signup-box">
+        <h3><i class="fas fa-user-plus"></i> إنشاء حساب أدمن</h3>
+        <div class="form-group">
+          <label><i class="fas fa-user"></i> الاسم الكامل</label>
+          <input type="text" placeholder="الاسم الكامل" id="signAdminName">
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-envelope"></i> البريد الإلكتروني</label>
+          <input type="email" placeholder="admin@domain.com" id="signAdminEmail">
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-phone"></i> رقم الهاتف</label>
+          <input type="tel" placeholder="05xxxxxxxx" id="signAdminPhone">
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-id-card"></i> الرقم الوطني (11 رقم)</label>
+          <input type="text" placeholder="الرقم الوطني" id="signAdminNationalId" maxlength="14">
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-user"></i> اسم المستخدم</label>
+          <input type="text" placeholder="اختر اسم مستخدم" id="signAdminUser">
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-lock"></i> كلمة المرور</label>
+          <input type="password" placeholder="كلمة المرور (4 أحرف على الأقل)" id="signAdminPass">
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-building"></i> إرفاق مستند إثبات تابع للجهة الحكومية</label>
+          <input type="file" id="signAdminDocument" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+          <span class="file-name" id="signAdminFileName">لم يتم اختيار ملف</span>
+        </div>
+        <button class="btn-primary" id="signAdminBtn"><i class="fas fa-user-shield"></i> إنشاء حساب أدمن</button>
+      </div>
+    </section>
+
+    <section class="page" id="page-citizen-dashboard">
+      <div class="back-row">
+        <button class="btn-secondary" onclick="navigateTo('home')"><i class="fas fa-arrow-right"></i> رجوع للرئيسية</button>
+      </div>
+      <div class="dashboard-card">
+        <h3><i class="fas fa-user-circle"></i> لوحة تحكم المواطن</h3>
+        <ul>
+          <li><span>الرصيد</span> <span class="badge">500 ريال</span></li>
+          <li><span>طلباتي</span> <span class="badge">3 نشطة</span></li>
+          <li><span>الإشعارات</span> <span class="badge">2 جديدة</span></li>
+          <li><span>آخر نشاط</span> <span>منذ 10 دقائق</span></li>
+        </ul>
+        <p style="margin-top:14px; color:#2a7de1;"><i class="fas fa-check-circle"></i> مرحباً بك في لوحة المواطن</p>
+        <button class="btn-primary" id="logoutBtn" style="margin-top:16px; width:auto; padding:8px 28px;"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</button>
+      </div>
+    </section>
+
+    <section class="page" id="page-admin-dashboard">
+      <div class="back-row">
+        <button class="btn-secondary" onclick="navigateTo('home')"><i class="fas fa-arrow-right"></i> رجوع للرئيسية</button>
+      </div>
+      <div class="dashboard-card">
+        <h3><i class="fas fa-user-shield"></i> لوحة تحكم الأدمن</h3>
+        <ul>
+          <li><span>إجمالي المستخدمين</span> <span class="badge">142</span></li>
+          <li><span>طلبات جديدة</span> <span class="badge">12</span></li>
+          <li><span>تقارير</span> <span class="badge">4</span></li>
+          <li><span>حالة النظام</span> <span class="badge" style="background:#d1fae5;">مستقر</span></li>
+        </ul>
+        <p style="margin-top:14px; color:#1e4a7a;"><i class="fas fa-cog"></i> صلاحيات إدارة كاملة</p>
+        <button class="btn-primary" id="logoutBtnAdmin" style="margin-top:16px; width:auto; padding:8px 28px;"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</button>
+      </div>
+    </section>
+
+    <div class="footer">
+      <p>© 2026 منصة الخدمات — جميع الحقوق محفوظة</p>
+    </div>
+  </main>
+  <div id="toastMessage" class="toast"></div>
+
+  <script>
+    (function() {
+      const pages = document.querySelectorAll('.page');
+      const navLinks = document.querySelectorAll('#navLinks a');
+      const quickCards = document.querySelectorAll('.quick-card');
+      const choiceCards = document.querySelectorAll('.choice-card');
+      const toast = document.getElementById('toastMessage');
+      const citizenDashLink = document.getElementById('citizenDashLink');
+      const adminDashLink = document.getElementById('adminDashLink');
+      const menuToggle = document.getElementById('menuToggle');
+      const navLinksContainer = document.getElementById('navLinks');
+
+      let currentUser = null;
+
+      function showToast(msg) {
+        toast.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2800);
+      }
+
+      window.navigateTo = function(pageId) {
+        pages.forEach(p => p.classList.remove('active'));
+        const target = document.getElementById('page-' + pageId);
+        if (target) target.classList.add('active');
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.dataset.page === pageId) link.classList.add('active');
+        });
+        quickCards.forEach(card => {
+          card.style.borderColor = '#e2e9f2';
+          if (card.dataset.page === pageId) card.style.borderColor = '#2a7de1';
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (window.innerWidth <= 768) {
+          navLinksContainer.classList.remove('open');
+        }
+        updateDashboardLinks();
+      };
+
+      function updateDashboardLinks() {
+        if (currentUser === 'citizen') {
+          citizenDashLink.classList.remove('hidden-dashboard-link');
+          adminDashLink.classList.add('hidden-dashboard-link');
+        } else if (currentUser === 'admin') {
+          adminDashLink.classList.remove('hidden-dashboard-link');
+          citizenDashLink.classList.add('hidden-dashboard-link');
+        } else {
+          citizenDashLink.classList.add('hidden-dashboard-link');
+          adminDashLink.classList.add('hidden-dashboard-link');
+        }
+      }
+
+      function logout() {
+        currentUser = null;
+        updateDashboardLinks();
+        showToast('🚪 تم تسجيل الخروج');
+        navigateTo('home');
+      }
+
+      menuToggle.addEventListener('click', () => {
+        navLinksContainer.classList.toggle('open');
+      });
+      document.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768) {
+          if (!e.target.closest('.header-content')) {
+            navLinksContainer.classList.remove('open');
+          }
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const page = link.dataset.page;
+          if (page) {
+            if ((page === 'citizen-dashboard' && currentUser !== 'citizen') ||
+                (page === 'admin-dashboard' && currentUser !== 'admin')) {
+              showToast('⚠️ يرجى تسجيل الدخول أولاً للوصول إلى لوحة التحكم');
+              return;
+            }
+            navigateTo(page);
+          }
+        });
+      });
+
+      quickCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+          e.preventDefault();
+          const page = card.dataset.page;
+          if (page) {
+            if ((page === 'citizen-dashboard' && currentUser !== 'citizen') ||
+                (page === 'admin-dashboard' && currentUser !== 'admin')) {
+              showToast('⚠️ يرجى تسجيل الدخول أولاً للوصول إلى لوحة التحكم');
+              return;
+            }
+            navigateTo(page);
+          }
+        });
+      });
+
+      choiceCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+          e.preventDefault();
+          const page = card.dataset.page;
+          if (page) {
+            navigateTo(page);
+          }
+        });
+      });
+
+      // ========== التنسيق التلقائي للرقم الوطني (مخصص لإنشاء الحساب فقط) ==========
+      function formatNationalId(input) {
+        let value = input.value.replace(/\D/g, '');
+        if (value.length > 11) value = value.slice(0, 11);
+        let formatted = '';
+        for (let i = 0; i < value.length; i++) {
+          if (i > 0 && i % 3 === 0 && i < 11) {
+            formatted += '-';
+          }
+          formatted += value[i];
+        }
+        input.value = formatted;
+      }
+
+      const nationalIdInputs = ['signCitizenNationalId', 'signAdminNationalId'];
+      nationalIdInputs.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.addEventListener('input', function() {
+            formatNationalId(this);
+          });
+        }
+      });
+
+      function setupFileInput(fileInputId, displayId) {
+        const fileInput = document.getElementById(fileInputId);
+        const display = document.getElementById(displayId);
+        if (fileInput && display) {
+          fileInput.addEventListener('change', function() {
+            display.textContent = this.files[0] ? this.files[0].name : 'لم يتم اختيار ملف';
+          });
+        }
+      }
+      setupFileInput('signCitizenDocument', 'signCitizenFileName');
+      setupFileInput('signAdminDocument', 'signAdminFileName');
+
+      // ========== نماذج تسجيل الدخول (المعدلة برمجياً) ==========
+      document.getElementById('citizenLoginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const user = document.getElementById('citizenUser').value.trim();
+        const pass = document.getElementById('citizenPassword').value.trim();
+
+        if (!user || !pass) {
+          showToast('⚠️ يرجى إدخال اسم المستخدم وكلمة المرور');
+          return;
+        }
+        // محاكاة تسجيل الدخول الناجح لغرض العرض والتحكم باللوحة
+        currentUser = 'citizen';
+        updateDashboardLinks();
+        showToast('✅ تم تسجيل دخول المواطن بنجاح');
+        navigateTo('citizen-dashboard');
+      });
+
+      document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const user = document.getElementById('adminUser').value.trim();
+        const pass = document.getElementById('adminPassword').value.trim();
+
+        if (!user || !pass) {
+          showToast('⚠️ يرجى إدخال اسم المستخدم وكلمة المرور');
+          return;
+        }
+        // محاكاة تسجيل الدخول الناجح للأدمن
+        currentUser = 'admin';
+        updateDashboardLinks();
+        showToast('✅ تم تسجيل دخول الأدمن بنجاح');
+        navigateTo('admin-dashboard');
+      });
+
+      // ========== إنشاء حساب ==========
+      document.getElementById('signCitizenBtn').addEventListener('click', function() {
+        const user = document.getElementById('signCitizenUser').value.trim();
+        showToast(`✅ تم إرسال طلب إنشاء حساب المواطن: ${user}`);
+      });
+
+      document.getElementById('signAdminBtn').addEventListener('click', function() {
+        const user = document.getElementById('signAdminUser').value.trim();
+        showToast(`✅ تم إرسال طلب إنشاء حساب الأدمن: ${user}`);
+      });
+
+      document.getElementById('logoutBtn').addEventListener('click', logout);
+      document.getElementById('logoutBtnAdmin').addEventListener('click', logout);
+
+      navigateTo('home');
+      updateDashboardLinks();
+    })();
+  </script>
+</body>
+</html>
